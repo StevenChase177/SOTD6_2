@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>
+        Script of the day week 6 number 2
+    </title>
+    <body>
+        <script>
+                let hearts1 = new cardClass(1,"hearts")
+                let spades2 = new cardClass(2,"spades")
+            // protype class for cards
+            function cardClass(rank, suit){
+                this.rank = rank
+                this.suit = suit
+                this.isVisable = true
+                this.show = function(){
+                this.isVisable = true
+                }
+                this.hide = function(){
+                this.isVisable = false
+              } 
+            }
+            itterateThroughCards()
+            function itterateThroughCards(){
+            let newArray = [hearts1, spades2]
+               for(thing in newArray){
+                    document.write(
+                        `<p id=${newArray[thing].rank}${newArray[thing].suit}> 
+                            ${newArray[thing].rank} of ${newArray[thing].suit}, is visable: ${newArray[thing].isVisable} 
+                        </p>
+                        <button id ="${newArray[thing].suit}${newArray[thing].rank}" 
+                        onClick="findInstance(event)"> change visiblity </button> <br>`)
+               }
+            }
+            // checks id of the button pressed then sends the right instance of the card class to the next function
+            function findInstance(event){
+                if (event.target.id == "spades2"){
+                  changeIsViable(spades2)  
+                }else{
+                    changeIsViable(hearts1)
+                }
+            }
+            // calls the right show or hide function for the instance of the class then spends class intance to the next function
+            function changeIsViable(classInstance){
+                if(classInstance.isVisable){
+                    classInstance.hide()
+                }else{
+                    classInstance.show()
+                }
+                upDateDom(classInstance)
+            }
+            // checks the isViable propertey of the class instance and updates the dom accordingly 
+            function upDateDom(something){
+                if(something.isVisable != true){
+                    document.getElementById(something.rank + something.suit).innerHTML = "something is missing"
+                }else {
+                    document.getElementById(something.rank + something.suit).innerHTML = `${something.suit} ${something.rank}, is visable: ${something.isVisable}`
+                }
+            }   
+        </script>
+    </body>
+</html>
